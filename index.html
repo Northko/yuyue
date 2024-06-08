@@ -1,1 +1,89 @@
-<h1>测试预约页面</h1>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">预约</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">姓名：</label>
+                <input name="xm" type="text" class="form-control xm" id="formGroupExampleInput"  ">
+            </div>
+            <div class="form-group">
+                <label for="id">身份证号：</label>
+				<input name="sfzh" type="text" class="form-control sfzh" id="formGroupExampleInput"  ">
+            </div>
+            <div class="form-group">
+                <label for="product">商品名称：</label>
+				<input name="spmc" type="text" class="form-control spmc" id="formGroupExampleInput"  " value="《爱如珍宝》" readonly>
+            </div>
+            <div class="form-group">
+                <label for="productDetails">商品规格：</label>
+				<input name="spgg" type="text" class="form-control spgg" id="formGroupExampleInput"  " value="六年珍藏版大全套" readonly>
+            </div>
+            <div class="form-group">
+                <label for="productQuantity">预定数量：</label>
+				<input name="ydsl" type="text" class="form-control ydsl" id="formGroupExampleInput"  ">
+            </div>
+            <div class="form-group">
+				<label for="formGroupExampleInput">剩余额度：</label>
+				<input name="syed" type="text" class="form-control syed" id="formGroupExampleInput"  ">
+            </div>
+            <div class="form-group">
+                <label for="address">网点名称：</label>
+				<input name="wdmc" type="text" class="form-control wdmc" id="formGroupExampleInput"  ">
+            </div>
+            <div class="form-group">
+                <label for="phone">理财经理：</label>
+				<input name="lcjl" type="text" class="form-control lcjl" id="formGroupExampleInput"  ">
+            <div class="form-group">
+                <label for="email">理财经理工号：</label>
+				<input name="lcjlgh" type="text" class="form-control lcjlgh" id="formGroupExampleInput"  ">
+            </div>
+            <div class="form-group">
+                <label for="remarks">预约编码：</label>
+                <input name="yybm" type="text" class="form-control yybm" id="formGroupExampleInput"  ">
+            </div>
+			<div class="form-group">
+			    <label for="remarks">预定时间：</label>
+				<input type="date" class="form-control ydsj" id="deliveryDate">
+				<!-- <input name="ydsj" type="text" class="form-control ydsj" id="formGroupExampleInput"  "> -->
+			</div>
+            <!-- <button type="submit" class="btn btn-primary">预约</button> -->
+			<button id="dianji" class="btn btn-primary">预约</button>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+   	$(function(){
+   		$("#dianji").click(function(){
+   			// var aaa = $(".spgg").val();
+   			var aaa = $(".xm").val();
+   			var params = "xm=" + $(".xm").val() + "&sfzh="+$(".sfzh").val() + "&spmc="+$(".spmc").val() + "&spgg="+$(".spgg").val() + "&ydsl="+$(".ydsl").val()
+   			 + "&syed="+$(".syed").val() + "&wdmc="+$(".wdmc").val() + "&lcjl="+$(".lcjl").val() + "&lcjlgh="+$(".lcjlgh").val() + "&yybm="+$(".yybm").val()
+   			  + "&ydsj="+$(".ydsj").val()
+   			window.location.href = "index2.html?"+params
+   			return false;
+   		})
+   	})
+   	
+   </script>
+</body>
+</html>
