@@ -52,7 +52,8 @@
             <div class="form-group">
                 <label for="phone">理财经理：</label>
 				<input name="lcjl" type="text" class="form-control lcjl" id="formGroupExampleInput"  ">
-            <div class="form-group">
+            </div>
+			<div class="form-group">
                 <label for="email">理财经理工号：</label>
 				<input name="lcjlgh" type="text" class="form-control lcjlgh" id="formGroupExampleInput"  ">
             </div>
@@ -62,7 +63,7 @@
             </div>
 			<div class="form-group">
 			    <label for="remarks">预定时间：</label>
-				<input type="date" class="form-control ydsj" id="deliveryDate">
+				<input type="datetime-local" class="form-control ydsj" id="deliveryDate">
 				<!-- <input name="ydsj" type="text" class="form-control ydsj" id="formGroupExampleInput"  "> -->
 			</div>
             <!-- <button type="submit" class="btn btn-primary">预约</button> -->
@@ -79,9 +80,31 @@
    			var params = "xm=" + $(".xm").val() + "&sfzh="+$(".sfzh").val() + "&spmc="+$(".spmc").val() + "&spgg="+$(".spgg").val() + "&ydsl="+$(".ydsl").val()
    			 + "&syed="+$(".syed").val() + "&wdmc="+$(".wdmc").val() + "&lcjl="+$(".lcjl").val() + "&lcjlgh="+$(".lcjlgh").val() + "&yybm="+$(".yybm").val()
    			  + "&ydsj="+$(".ydsj").val()
-   			window.location.href = "index2.html?"+params
+   			// window.location.href = "index2.html?"+params
+			window.location.href = "index2.html?"+params
    			return false;
    		})
+		
+		var today = new Date();//返回当前日期时间
+		var yyyy = today.getFullYear();//获取当前年份
+		var MM = today.getMonth() + 1;//因为getMonth()方法获取的是索引值,所以要＋1
+		var dd = today.getDate();//返回一个月中的某一天
+		var hh = today.getHours();//返回小时 (0 ~ 23)
+		var mm = today.getMinutes();//返回分钟 (0 ~ 59)
+		MM = checkTime(MM);//调用下面的checkTime函数，设置小于10的时间数字格式，例如5秒显示成05秒
+		dd = checkTime(dd);
+		hh = checkTime(hh);
+		mm = checkTime(mm);
+		var time = yyyy + "-" + MM + "-" + dd + "T" + hh + ":" + mm;
+		var dateControl = $(".ydsj");
+		dateControl.val(time);
+		function checkTime(i) {
+			if (i < 10) {
+				i = "0" + i;//这里如果是一位数则在前面添加一位0
+			}
+			return i;
+		}
+		
    	})
    	
    </script>
