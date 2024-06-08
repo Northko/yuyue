@@ -25,11 +25,11 @@
         <form>
             <div class="form-group">
                 <label for="name">姓名：</label>
-                <input name="xm" type="text" class="form-control xm" id="formGroupExampleInput"  ">
+                <input name="xm" type="text" class="form-control xm" id="xm" oninput="validateInput()">
             </div>
             <div class="form-group">
                 <label for="id">身份证号：</label>
-				<input name="sfzh" type="text" class="form-control sfzh" id="formGroupExampleInput"  ">
+				<input name="sfzh" type="text" class="form-control sfzh" id="formGroupExampleInput"  oninput="validateInput(event)" maxlength="18">
             </div>
             <div class="form-group">
                 <label for="product">商品名称：</label>
@@ -41,11 +41,11 @@
             </div>
             <div class="form-group">
                 <label for="productQuantity">预定数量：</label>
-				<input name="ydsl" type="text" class="form-control ydsl" id="formGroupExampleInput"  ">
+				<input name="ydsl" type="text" class="form-control ydsl" id="formGroupExampleInput"  pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <div class="form-group">
 				<label for="formGroupExampleInput">剩余额度：</label>
-				<input name="syed" type="text" class="form-control syed" id="formGroupExampleInput"  ">
+				<input name="syed" type="text" class="form-control syed" id="formGroupExampleInput"  pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
             <div class="form-group">
                 <label for="address">网点名称：</label>
@@ -57,11 +57,11 @@
             </div>
 			<div class="form-group">
                 <label for="email">理财经理工号：</label>
-				<input name="lcjlgh" type="text" class="form-control lcjlgh" id="formGroupExampleInput"  ">
+				<input name="lcjlgh" type="text" class="form-control lcjlgh" id="formGroupExampleInput" pattern="[0-9]*" oninput="this.value = this.value.replace(/[^0-9]/g, '')" maxlength="9">
             </div>
             <div class="form-group">
                 <label for="remarks">预约编码：</label>
-                <input name="yybm" type="text" class="form-control yybm" id="formGroupExampleInput"  ">
+                <input name="yybm" type="text" class="form-control yybm" id="yybm"  readonly>
             </div>
 			<div class="form-group">
 			    <label for="remarks">预定时间：</label>
@@ -69,12 +69,16 @@
 				<!-- <input name="ydsj" type="text" class="form-control ydsj" id="formGroupExampleInput"  "> -->
 			</div>
             <!-- <button type="submit" class="btn btn-primary">预约</button> -->
-			<button id="dianji" class="btn btn-primary">预约</button>
+			<button id="dianji" class="btn btn-primary">爱如珍宝预约通道</button>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
    <script>
+	   window.onload = function() {
+	       generateRandomString();
+	   };
+	   
    	$(function(){
    		$("#dianji").click(function(){
    			// var aaa = $(".spgg").val();
@@ -108,7 +112,51 @@
 		}
 		
    	})
-   	
+	
+	//生成两个随机字母和七个随机数字
+	function generateRandomString() {
+	    var result = '';
+	    
+	    // 生成随机字母
+	    for (var i = 0; i < 2; i++) {
+	        result += String.fromCharCode(65 + Math.floor(Math.random() * 26)); // 生成 A-Z 的随机字母
+	    }
+	    
+	    // 生成随机数字
+	    for (var i = 0; i < 7; i++) {
+	        result += Math.floor(Math.random() * 10); // 生成 0-9 的随机数字
+	    }
+	    
+	    document.getElementById("yybm").value = result;
+	}
+	
+	//身份证验证
+	function validateInput(event) {
+	    var input = event.target.value;
+	    var filteredInput = input.replace(/[^0-9Xx]/g, ''); // 只保留数字和X/x
+	    if (filteredInput.length > 18) {
+	        event.target.value = filteredInput.substring(0, 18); // 截取前18位字符
+	    } else {
+	        var regex = /(^\d{17}[\dXx]$)|(^\d{15}$)/; // 验证规则：15位或18位数字，最后一位可以为X/x
+	        if (regex.test(filteredInput)) {
+	            event.target.value = filteredInput.toUpperCase(); // 保证最后一位为大写字母X
+	        } else {
+	            // 如果输入不符合规则，则保留用户输入的数字
+	            event.target.value = input.replace(/[^0-9]/g, '').substring(0, 18);
+	        }
+	    }
+	}
+	
+	function validateInput() {
+	  var inputElement = document.getElementById("xm");
+	  var inputValue = inputElement.value;
+	  
+	  // 使用正则表达式过滤出中文字符
+	  var filteredValue = inputValue.replace(/[^\u4e00-\u9fa5]/, '');
+	  
+	  // 更新输入框的值为过滤后的值
+	  inputElement.value = filteredValue;
+	}
    </script>
 </body>
 </html>
