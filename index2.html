@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>预约成功</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+        }
+        .success-icon {
+            font-size: 50px;
+            color: #dc3545;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .header .amount {
+            font-size: 18px;
+            color: #dc3545;
+            font-weight: bold;
+        }
+        .details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .details .row {
+            margin-bottom: 15px;
+        }
+        .details .row:last-child {
+            margin-bottom: 0;
+        }
+        .details .col-4 {
+            font-weight: bold;
+			color: #95a1ab;
+        }
+        .details .col-8 {
+            text-align: right;
+        }
+		.details .xian {
+			height: 1px;
+			background-color: #ccddea;
+			width: 90%;
+			margin: 10px 0 0 5%;
+		}
+    </style>
+</head>
+<body>
+    <div class="container" style="background-color: rgb(205, 22, 52);">
+		<div style="background-color: #fff;border-radius: 50px;">
+			<div class="header">
+				<i class="fas fa-check-circle success-icon"></i>
+				<h1>预约成功</h1>
+				
+				<p style="border-radius: 50px;font-size: 12px;">请在规定时间内完成付款<br>详情请咨询您的理财经理</p>
+				<p  style="border-radius: 50px;font-size: 12px;">额度保留时间：
+					<span class="amount">
+						<span id="countdown" >
+							<span id="time-left">
+								16:00:00
+							</span>
+						</span>
+					</span>
+				</p>
+			</div>
+		</div>
+        <div class="details" style="border-radius: 50px;font-size: 12px;">
+            <div class="row">
+                <div class="col-4">客户姓名</div>
+                <div id="xm" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">身份证号后六位</div>
+                <div id="sfzh" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">商品名称</div>
+                <div id="spmc" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">商品规格</div>
+                <div id="spgg" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">预定数量</div>
+                <div id="ydsl" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">剩余额度</div>
+                <div id="syed" class="col-8" style="color: rgb(205, 22, 52);"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">网点名称</div>
+                <div id="wdmc" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">理财经理</div>
+                <div id="lcjl" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+            <div class="row">
+                <div class="col-4">理财经理工号</div>
+                <div id="lcjlgh" class="col-8"></div>
+				<div class="xian"></div>
+            </div>
+			<div class="row">
+			    <div class="col-4">预约编号</div>
+			    <div id="yybm" class="col-8"></div>
+				<div class="xian"></div>
+			</div>
+            <div class="row">
+                <div class="col-4">预定时间</div>
+                <div id="ydsj" class="col-8"></div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+</body>
+<script>
+	window.onload = function () {
+		// 解析URL参数
+			var urlParams = new URLSearchParams(window.location.search);
+			// 获取参数并且赋值
+			$("#xm").text(urlParams.get('xm').substring(0,1)+"**")
+			$("#sfzh").text("************"+urlParams.get('sfzh').substring(urlParams.get('sfzh').length - 6))
+			$("#spmc").text(urlParams.get('spmc'))
+			$("#spgg").text(urlParams.get('spgg'))
+			$("#ydsl").text(urlParams.get('ydsl')+"套")
+			$("#syed").text(urlParams.get('syed')+"套")
+			$("#wdmc").text(urlParams.get('wdmc'))
+			$("#lcjl").text(urlParams.get('lcjl'))
+			$("#lcjlgh").text(urlParams.get('lcjlgh'))
+			$("#yybm").text(urlParams.get('yybm'))
+			var date = new Date(urlParams.get('ydsj'));
+			var options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+			var formatter = new Intl.DateTimeFormat('zh-CN', options);
+			$("#ydsj").text(formatter.format(date))
+			
+			
+			var timeLeft = document.querySelector('#time-left');
+			startCountdown(57600, timeLeft); // 倒计时10秒
+	}
+	
+	function startCountdown(duration, display) {
+	    var timer = duration, minutes, seconds;
+	    var countdown = setInterval(function () {
+			duration = parseInt(timer / 3600, 10);
+	        minutes = parseInt((timer % 3600) / 60, 10);	
+	        seconds = parseInt(timer % 60, 10);
+	 
+	        duration = duration < 10 ? "0" + duration : duration;
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+	        seconds = seconds < 10 ? "0" + seconds : seconds;
+	 
+	        display.textContent = duration + ":" + minutes + ":" + seconds;
+	 
+	        if (--timer < 0) {
+	            clearInterval(countdown);
+	            display.textContent = "时间到!";
+	        }
+	    }, 1000);
+	}
+	 
+</script>
+</html>
