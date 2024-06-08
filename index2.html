@@ -70,25 +70,25 @@
 			<div class="header" style="padding: 20px 0;">
 				<i class="fas fa-check-circle success-icon" style="font-size: 100px;"></i>
 				<h1>预约成功</h1>
-				<p style="border-radius: 50px;font-size: 12px;">请在规定时间内完成付款<br>详情请咨询您的理财经理</p>
-				<p  style="border-radius: 50px;font-size: 12px;">额度保留时间：
+				<p style="border-radius: 50px;font-size: 16px;">请在规定时间内完成付款<br>详情请咨询您的理财经理</p>
+				<p  style="border-radius: 50px;font-size: 16px;">额度保留时间：
 					<span class="amount">
 						<span id="countdown" >
 							<span id="time-left">
-								16:00:00
+								08:00:00
 							</span>
 						</span>
 					</span>
 				</p>
 			</div>
 		</div>
-        <div class="details" style="border-radius: 50px;">
+        <div class="details" style="border-radius: 50px;font-size: 16px;">
             <div class="row">
                 <div class="col-4">客户姓名</div>
                 <div id="xm" class="col-8"></div>
 				<div class="xian"></div>
             </div>
-            <div class="row">	
+            <div class="row">
                 <div class="col-4">身份证号后六位</div>
                 <div id="sfzh" class="col-8"></div>
 				<div class="xian"></div>
@@ -164,7 +164,7 @@
 			
 			
 			var timeLeft = document.querySelector('#time-left');
-			startCountdown(57600, timeLeft); // 倒计时10秒
+			startCountdown(28800, timeLeft); // 倒计时10秒
 	}
 	
 	function startCountdown(duration, display) {
