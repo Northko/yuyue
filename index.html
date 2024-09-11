@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>预约</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <style>
         .container {
             margin-top: 20px;
@@ -17,6 +18,15 @@
         .btn-primary {
             width: 100%;
         }
+    .dropdown-toggle {
+	    width: 100%; /* 设置固定宽度 */  
+	    background-color: white; /* 设置背景颜色为白色 */  
+	    color: black; /* 设置文本颜色为黑色 */  
+		text-align: left;
+	}  
+	.dropdown-toggle:hover {  
+	    background-color: #f8f9fa; /* 悬停时的背景颜色 */  
+	}  
     </style>
 </head>
 <body>
@@ -36,13 +46,18 @@
 				<input name="spmc" type="text" class="form-control spmc" id="formGroupExampleInput"  " value="《爱如珍宝》" readonly> 
             </div>
             <div class="form-group">
-                <label for="productDetails">商品规格：</label>
-		     <select class="spgg">
-					<option value="2024珍藏版">2024珍藏版</option>
-					<option value="六年珍藏大全套">六年珍藏大全套</option>
-					<option value="六年珍藏大全套五箱装">六年珍藏大全套五箱装</option>
-					<option value="六年珍藏大全套十箱装">六年珍藏大全套十箱装</option>
-				</select>
+                <div class="dropdown">
+				    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">  
+				        2024珍藏版
+				    </button>  
+				    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">  
+				        <li><a class="dropdown-item" onclick="selectOption('2024珍藏版')">2024珍藏版</a></li>  
+				        <li><a class="dropdown-item" onclick="selectOption('六年珍藏大全套')">六年珍藏大全套</a></li>  
+				        <li><a class="dropdown-item" onclick="selectOption('六年珍藏大全套五箱装')">六年珍藏大全套五箱装</a></li>  
+						<li><a class="dropdown-item" onclick="selectOption('六年珍藏大全套十箱装')">六年珍藏大全套十箱装</a></li>
+				    </ul>  
+				</div>  
+				<input id="selectedValue" type="hidden" value="2024珍藏版"/>
 		    <!-- <input name="spgg" type="text" class="form-control spgg" id="formGroupExampleInput"  " value="六年珍藏版大全套" readonly> -->
             </div>
             <div class="form-group">
@@ -80,6 +95,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
    <script>
 	   window.onload = function() {
 	       generateRandomString();
@@ -163,6 +179,12 @@
 	  // 更新输入框的值为过滤后的值
 	  inputElement.value = filteredValue;
 	}
+
+	   //下拉框选择
+	function selectOption(option) {
+	    document.getElementById('dropdownMenuButton').innerText = option;  
+		document.getElementById('selectedValue').value = option; // 更新选中的值
+	} 
    </script>
 </body>
 </html>
